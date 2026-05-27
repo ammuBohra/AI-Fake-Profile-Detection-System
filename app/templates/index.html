@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Fake Profile Detection</title>
+</head>
+
+
+<body>
+        <h1>Fake Profile Detection System</h1>
+
+        <form action="/predict" method="POST">
+
+            <input type="number" name="followers" placeholder="Followers" required>
+
+            <br><br>
+
+            <input type="number" name="following" placeholder="Following" required>
+
+            <br><br>
+
+            <input type="number" name="posts" placeholder="Posts" required>
+
+            <br><br>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        <h2>{{ prediction_text }}</h2>
+    
+</body>
+</html>
