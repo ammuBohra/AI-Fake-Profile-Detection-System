@@ -67,26 +67,37 @@
 
         <form action="/predict" method="POST">
 
-             <label>Followers:</label>
-             <input type="number" name="followers" required>
-             <br><br>
+            <input type="number" name="profile_pic" placeholder="Profile Pic (0 or 1)" required>
+
+            <input type="number" name="nums_length_username" placeholder="Numbers Length Username" required>
+
+            <input type="number" name="fullname_words" placeholder="Fullname Words" required>
+
+            <input type="number" name="nums_length_fullname" placeholder="Numbers Length Fullname" required>
+
+            <input type="number" name="name_equals_username" placeholder="Name Equals Username" required>
+
+            <input type="number" name="description_length" placeholder="Description Length" required>
+
+            <input type="number" name="external_URL" placeholder="External URL (0 or 1)" required>
+
+            <input type="number" name="private" placeholder="Private Account (0 or 1)" required>
+
+            <input type="number" name="posts" placeholder="Posts" required>
+
+            <input type="number" name="followers" placeholder="Followers" required>
+
+            <input type="number" name="following" placeholder="Following" required>
+            <br><br>
              
-             <label>Following:</label>
-             <input type="number" name="following" required>
-             <br><br>
-             
-             <label>Posts:</label>
-             <input type="number" name="posts" required>
-             <br><br>
-             
-             <button type="submit">Predict</button>
+            <button type="submit">Predict</button>
 
         </form>
 
         {% if prediction_text %}
             <h2>{{ prediction_text }}</h2>
         
-            {% endif %}
+        {% endif %}
 
     </div>
 </body>
