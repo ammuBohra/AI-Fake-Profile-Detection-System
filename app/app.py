@@ -33,11 +33,13 @@ def predict():
     input_data = [[followers, following, posts]]
 
     prediction = model.predict(input_data)
+    probability = model.predict_proba(input_data)
+    confidence = round(max(probability[0]) * 100, 2)
 
     if prediction[0] == 1:
-        result = "Fake Profile Detected"
+        result = f"Fake Profile Detected ({confidence}% Confidence)"
     else: 
-        result = "Genuine Profile"
+        result = f"Genuine Profile ({confidence}% Confidence)"
     
     return render_template("index.html", prediction_text = result)
 
