@@ -5,28 +5,89 @@
     <title>Fake Profile Detection</title>
 </head>
 
+<style>
+
+    body{
+        font-family: Arial;
+        background: linear-gradient(to right, #141e30, #243b55);
+        color: white;
+        text-align: center;
+        padding-top: 50px;
+    }
+
+    .container{
+        width: 400px;
+        margin: auto;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0px 0px 15px black;
+    }
+
+    h1{
+        margin-bottom: 30px;
+    }
+
+    input{
+        width: 90%;
+        padding: 12px;
+        margin: 10px;
+        border: none;
+        border-radius: 8px;
+    }
+
+    button:hover{
+        background: #0072ff;
+    }
+
+    .result{
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .fake{
+        background-color: #ff4d4d;
+    }
+
+    .real{
+        background-color: #00cc66;
+    }
+
+</style>
+
 
 <body>
-        <h1>Fake Profile Detection System</h1>
+
+    <div class="container">
+
+        <h1>Instagram Fake Profile Detection</h1>
 
         <form action="/predict" method="POST">
 
-            <input type="number" name="followers" placeholder="Followers" required>
+             <label>Followers:</label>
+             <input type="number" name="followers" required>
+             <br><br>
+             
+             <label>Following:</label>
+             <input type="number" name="following" required>
+             <br><br>
+             
+             <label>Posts:</label>
+             <input type="number" name="posts" required>
+             <br><br>
+             
+             <button type="submit">Predict</button>
 
-            <br><br>
-
-            <input type="number" name="following" placeholder="Following" required>
-
-            <br><br>
-
-            <input type="number" name="posts" placeholder="Posts" required>
-
-            <br><br>
-
-            <button type="submit">Predict</button>
         </form>
 
-        <h2>{{ prediction_text }}</h2>
-    
+        {% if prediction_text %}
+            <h2>{{ prediction_text }}</h2>
+        
+            {% endif %}
+
+    </div>
 </body>
 </html>
