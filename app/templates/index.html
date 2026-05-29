@@ -269,6 +269,30 @@
                 margin-bottom: 80px;
             }
         }
+
+        
+        .history {
+
+            margin-top: 40px;
+        }
+
+        .history h2 {
+
+            text-align: center;
+
+            margin-bottom: 20px;
+        }
+
+        .history-card {
+
+            background: rgba(255, 255, 255, 0.15);
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            margin-bottom: 10px;
+        }
     </style>
 
 </head>
@@ -397,6 +421,32 @@
         });
 
     </script>
+
+    <!-- HISTORY SECTION -->
+
+    <div class="history">
+
+        <h2>Prediction History</h2>
+
+        {% for item in history %}
+
+        <div class="history-card">
+
+            <p>
+                <strong>Result:</strong>
+                {{ item.result }}
+            </p>
+
+            <p>
+                <strong>Confidence:</strong>
+                {{ item.confidence }}%
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
 
     <footer>
 

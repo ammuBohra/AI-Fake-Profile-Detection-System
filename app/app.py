@@ -7,6 +7,8 @@ from sklearn.model_selection import train_test_split
 
 app = Flask(__name__)
 
+prediction_history = []
+
 # Load dataset
 df = pd.read_csv("../dataset/fake_instagram.csv")
 
@@ -49,12 +51,15 @@ real_percentage = round((real_profiles / total_profiles) *100, 2)
 
 @app.route("/")
 def home():
+
     return render_template(
         "index.html",
         accuracy = accuracy,
         total_profiles = total_profiles,
         fake_percentage = fake_percentage,
-        real_percentage = real_percentage)
+        real_percentage = real_percentage,
+        history = prediction_history
+    )
 
 
 
@@ -89,23 +94,30 @@ def predict():
     ]]
 
     prediction = model.predict(input_data)
-    
     probability = model.predict_proba(input_data)
-    
     confidence = round(max(probability[0]) * 100, 2)
-
-    if prediction[0] == 1:
-        result = f"Fake Profile Detected ({confidence}% Confidence)"
-    else: 
-        result = f"Genuine Profile ({confidence}% Confidence)"
     
+    # Prediction Result
+    if prediction[0] == 1:
+        result = "Fake Profile"
+        
+    else:
+        result = "Genuine Profile"
+    
+    # Store Prediction History
+    prediction_history.insert(0, {
+        "result": result,
+        "confidence": confidence
+    })
+
     return render_template(
         "index.html",
-        prediction_text = result,
+        prediction_text = f"{result} ({confidence}% Confidence)",
         accuracy = accuracy,
         total_profiles = total_profiles,
         fake_percentage = fake_percentage,
-        real_percentage = real_percentage)
+        real_percentage = real_percentage,
+    history = prediction_history)
 
 
 if __name__ == "__main__":
