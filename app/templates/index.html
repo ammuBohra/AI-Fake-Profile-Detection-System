@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AI Fake Profile Detection</title>
+    <title>AI Fake Instagram Profile Detection</title>
 
     <style>
 
@@ -54,6 +54,48 @@
             text-align: center;
             margin-bottom: 30px;
             font-size: 32px;
+        }
+
+        /* DASHBOARD */
+
+        .dashboard{
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 30px;
+        }
+
+        .card{
+
+            background: rgba(255,255,255,0.15);
+
+            padding: 20px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            transition: 0.3s;
+        }
+
+         .card:hover{
+
+            transform: translateY(-5px);
+
+            background: rgba(255,255,255,0.25);
+        }
+
+        .card h2{
+
+            font-size: 28px;
+
+            margin-bottom: 10px;
+
+            color: #00c6ff;
         }
 
         .form-group{
@@ -151,6 +193,32 @@
 
         <h1>AI Fake Instagram Profile Detection</h1>
 
+        <!-- DASHBOARD -->
+
+        <div class="dashboard">
+
+            <div class="card">
+                <h2>{{ accuracy }}%</h2>
+                <p>Model Accuracy</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ total_profiles }}</h2>
+                <p>Total Profiles</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ fake_percentage }}%</h2>
+                <p>Fake Profiles</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ real_percentage }}%</h2>
+                <p>Real Profiles</p>
+            </div>
+
+        </div>
+
         <form action="/predict" method="POST">
 
             <div class="form-group">
@@ -203,9 +271,11 @@
 
         </form>
         
-        <div>
+        <div class="result">
+
             {% if prediction_text %}
-            <h2>{{ prediction_text }}</h2>
+            
+                <h2>{{ prediction_text }}</h2>
             
             {% endif %}
         </div>
