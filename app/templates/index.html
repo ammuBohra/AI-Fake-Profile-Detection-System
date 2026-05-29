@@ -9,28 +9,95 @@
     <title>AI Fake Instagram Profile Detection</title>
 
     <style>
-
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body{
+        body {
             font-family: Arial, sans-serif;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
 
-            background: linear-gradient(
-                135deg,
-                #141e30,
-                #243b55
-            );
+            background: linear-gradient(135deg,
+                    #141e30,
+                    #243b55);
         }
 
-        .container{
+        .navbar {
+
+            position: fixed;
+
+            top: 0;
+
+            width: 100%;
+
+            padding: 20px 50px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            background: rgba(0, 0, 0, 0.3);
+
+            backdrop-filter: blur(10px);
+
+            z-index: 1000;
+        }
+
+        .navbar h2 {
+
+            color: white;
+        }
+
+        .navbar ul {
+
+            display: flex;
+
+            list-style: none;
+
+            gap: 20px;
+        }
+
+        .navbar a {
+
+            color: white;
+
+            text-decoration: none;
+
+            transition: 0.3s;
+        }
+
+        .navbar a:hover {
+
+            color: #00c6ff;
+        }
+
+        footer {
+
+            position: fixed;
+
+            bottom: 0;
+
+            width: 100%;
+
+            text-align: center;
+
+            padding: 12px;
+
+            background: rgba(0, 0, 0, 0.3);
+
+            color: white;
+
+            backdrop-filter: blur(10px);
+        }
+
+        .container {
 
             width: 90%;
             max-width: 700px;
@@ -39,18 +106,18 @@
 
             border-radius: 20px;
 
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
 
             backdrop-filter: blur(10px);
 
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 
             color: white;
 
             animation: fadeIn 1s ease;
         }
 
-        h1{
+        h1 {
             text-align: center;
             margin-bottom: 30px;
             font-size: 32px;
@@ -58,7 +125,7 @@
 
         /* DASHBOARD */
 
-        .dashboard{
+        .dashboard {
 
             display: grid;
 
@@ -69,9 +136,9 @@
             margin-bottom: 30px;
         }
 
-        .card{
+        .card {
 
-            background: rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.15);
 
             padding: 20px;
 
@@ -82,14 +149,14 @@
             transition: 0.3s;
         }
 
-         .card:hover{
+        .card:hover {
 
             transform: translateY(-5px);
 
-            background: rgba(255,255,255,0.25);
+            background: rgba(255, 255, 255, 0.25);
         }
 
-        .card h2{
+        .card h2 {
 
             font-size: 28px;
 
@@ -98,11 +165,11 @@
             color: #00c6ff;
         }
 
-        .form-group{
+        .form-group {
             margin-bottom: 15px;
         }
 
-        input{
+        input {
 
             width: 100%;
 
@@ -116,16 +183,16 @@
 
             font-size: 15px;
 
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
 
             color: white;
         }
 
-        input::placeholder{
+        input::placeholder {
             color: #ddd;
         }
 
-        button{
+        button {
 
             width: 100%;
 
@@ -137,11 +204,9 @@
 
             background: #00c6ff;
 
-            background: linear-gradient(
-                to right,
-                #0072ff,
-                #00c6ff
-            );
+            background: linear-gradient(to right,
+                    #0072ff,
+                    #00c6ff);
 
             color: white;
 
@@ -152,14 +217,14 @@
             transition: 0.3s;
         }
 
-        button:hover{
+        button:hover {
 
             transform: scale(1.03);
 
-            box-shadow: 0 0 20px rgba(0,198,255,0.5);
+            box-shadow: 0 0 20px rgba(0, 198, 255, 0.5);
         }
 
-        .result{
+        .result {
 
             margin-top: 25px;
 
@@ -170,24 +235,55 @@
             font-weight: bold;
         }
 
-        @keyframes fadeIn{
+        @keyframes fadeIn {
 
-            from{
+            from {
                 opacity: 0;
                 transform: translateY(20px);
             }
 
-            to{
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
+        @media(max-width:768px) {
+
+            .dashboard {
+
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+
+                flex-direction: column;
+
+                gap: 10px;
+            }
+
+            .container {
+
+                margin-top: 100px;
+
+                margin-bottom: 80px;
+            }
+        }
     </style>
 
 </head>
 
 <body>
+
+    <nav class="navbar">
+        <h2>AI Profile Detector</h2>
+
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Prediction</a></li>
+        </ul>
+    </nav>
 
     <div class="container">
 
@@ -265,35 +361,35 @@
                 <input type="number" name="following" placeholder="Following Count" required>
             </div>
 
-            <button type="submit" id = "predictBtn">
+            <button type="submit" id="predictBtn">
                 Predict Profile
             </button>
 
         </form>
-        
+
         <div class="result">
             {% if prediction_text %}
-                {% if "Fake" in prediction_text %}
-                    <h2 style="color:#ff4d4d;">
-                        {{ prediction_text }}
-                    </h2>
-                    
-                {% else %}
-                    <h2 style="color:#00ff99;">
-                        {{ prediction_text }}
-                    </h2>
+            {% if "Fake" in prediction_text %}
+            <h2 style="color:#ff4d4d;">
+                {{ prediction_text }}
+            </h2>
 
-                {% endif %}
-            
+            {% else %}
+            <h2 style="color:#00ff99;">
+                {{ prediction_text }}
+            </h2>
+
+            {% endif %}
+
             {% endif %}
         </div>
     </div>
 
     <script>
-        
+
         const form = document.querySelector("form");
 
-        form.addEventListener("submit", function(){
+        form.addEventListener("submit", function () {
 
             document.getElementById(
                 "predictBtn"
@@ -301,5 +397,14 @@
         });
 
     </script>
+
+    <footer>
+
+        <p>
+            Developed by Aamatullah Bohra | MCA AI/ML Project
+        </p>
+
+    </footer>
 </body>
+
 </html>
