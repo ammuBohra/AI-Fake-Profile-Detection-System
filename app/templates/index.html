@@ -1,104 +1,215 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Fake Profile Detection</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Fake Profile Detection</title>
+
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: linear-gradient(
+                135deg,
+                #141e30,
+                #243b55
+            );
+        }
+
+        .container{
+
+            width: 90%;
+            max-width: 700px;
+
+            padding: 40px;
+
+            border-radius: 20px;
+
+            background: rgba(255,255,255,0.1);
+
+            backdrop-filter: blur(10px);
+
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+
+            color: white;
+
+            animation: fadeIn 1s ease;
+        }
+
+        h1{
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+
+        .form-group{
+            margin-bottom: 15px;
+        }
+
+        input{
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 15px;
+
+            background: rgba(255,255,255,0.2);
+
+            color: white;
+        }
+
+        input::placeholder{
+            color: #ddd;
+        }
+
+        button{
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #00c6ff;
+
+            background: linear-gradient(
+                to right,
+                #0072ff,
+                #00c6ff
+            );
+
+            color: white;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        button:hover{
+
+            transform: scale(1.03);
+
+            box-shadow: 0 0 20px rgba(0,198,255,0.5);
+        }
+
+        .result{
+
+            margin-top: 25px;
+
+            text-align: center;
+
+            font-size: 24px;
+
+            font-weight: bold;
+        }
+
+        @keyframes fadeIn{
+
+            from{
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to{
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+
 </head>
-
-<style>
-
-    body{
-        font-family: Arial;
-        background: linear-gradient(to right, #141e30, #243b55);
-        color: white;
-        text-align: center;
-        padding-top: 50px;
-    }
-
-    .container{
-        width: 400px;
-        margin: auto;
-        background: rgba(255, 255, 255, 0.1);
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0px 0px 15px black;
-    }
-
-    h1{
-        margin-bottom: 30px;
-    }
-
-    input{
-        width: 90%;
-        padding: 12px;
-        margin: 10px;
-        border: none;
-        border-radius: 8px;
-    }
-
-    button:hover{
-        background: #0072ff;
-    }
-
-    .result{
-        margin-top: 20px;
-        padding: 15px;
-        border-radius: 10px;
-        font-size: 20px;
-        font-weight: bold;
-    }
-
-    .fake{
-        background-color: #ff4d4d;
-    }
-
-    .real{
-        background-color: #00cc66;
-    }
-
-</style>
-
 
 <body>
 
     <div class="container">
 
-        <h1>Instagram Fake Profile Detection</h1>
+        <h1>AI Fake Instagram Profile Detection</h1>
 
         <form action="/predict" method="POST">
 
-            <input type="number" name="profile_pic" placeholder="Profile Pic (0 or 1)" required>
+            <div class="form-group">
+                <input type="number" name="profile_pic" placeholder="Profile Picture (0 or 1)" required>
+            </div>
 
-            <input type="number" name="nums_length_username" placeholder="Numbers Length Username" required>
+            <div class="form-group">
+                <input type="number" name="nums_length_username" placeholder="Numbers in Username" required>
+            </div>
 
-            <input type="number" name="fullname_words" placeholder="Fullname Words" required>
+            <div class="form-group">
+                <input type="number" name="fullname_words" placeholder="Fullname Words" required>
+            </div>
 
-            <input type="number" name="nums_length_fullname" placeholder="Numbers Length Fullname" required>
+            <div class="form-group">
+                <input type="number" name="nums_length_fullname" placeholder="Numbers in Fullname" required>
+            </div>
 
-            <input type="number" name="name_equals_username" placeholder="Name Equals Username" required>
+            <div class="form-group">
+                <input type="number" name="name_equals_username" placeholder="Name Equals Username (0 or 1)" required>
+            </div>
 
-            <input type="number" name="description_length" placeholder="Description Length" required>
+            <div class="form-group">
+                <input type="number" name="description_length" placeholder="Description Length" required>
+            </div>
 
-            <input type="number" name="external_URL" placeholder="External URL (0 or 1)" required>
+            <div class="form-group">
+                <input type="number" name="external_URL" placeholder="External URL (0 or 1)" required>
+            </div>
 
-            <input type="number" name="private" placeholder="Private Account (0 or 1)" required>
+            <div class="form-group">
+                <input type="number" name="private" placeholder="Private Account (0 or 1)" required>
+            </div>
 
-            <input type="number" name="posts" placeholder="Posts" required>
+            <div class="form-group">
+                <input type="number" name="posts" placeholder="Posts Count" required>
+            </div>
 
-            <input type="number" name="followers" placeholder="Followers" required>
+            <div class="form-group">
+                <input type="number" name="followers" placeholder="Followers Count" required>
+            </div>
 
-            <input type="number" name="following" placeholder="Following" required>
-            <br><br>
-             
-            <button type="submit">Predict</button>
+            <div class="form-group">
+                <input type="number" name="following" placeholder="Following Count" required>
+            </div>
+
+            <button type="submit">
+                Predict Profile
+            </button>
 
         </form>
-
-        {% if prediction_text %}
-            <h2>{{ prediction_text }}</h2>
         
-        {% endif %}
-
+        <div>
+            {% if prediction_text %}
+            <h2>{{ prediction_text }}</h2>
+            
+            {% endif %}
+        </div>
+    
     </div>
 </body>
 </html>
