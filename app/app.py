@@ -102,7 +102,7 @@ def predict():
     return render_template(
         "index.html",
         prediction_text = result,
-        accracy = accuracy,
+        accuracy = accuracy,
         total_profiles = total_profiles,
         fake_percentage = fake_percentage,
         real_percentage = real_percentage)

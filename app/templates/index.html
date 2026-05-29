@@ -265,21 +265,41 @@
                 <input type="number" name="following" placeholder="Following Count" required>
             </div>
 
-            <button type="submit">
+            <button type="submit" id = "predictBtn">
                 Predict Profile
             </button>
 
         </form>
         
         <div class="result">
-
             {% if prediction_text %}
-            
-                <h2>{{ prediction_text }}</h2>
+                {% if "Fake" in prediction_text %}
+                    <h2 style="color:#ff4d4d;">
+                        {{ prediction_text }}
+                    </h2>
+                    
+                {% else %}
+                    <h2 style="color:#00ff99;">
+                        {{ prediction_text }}
+                    </h2>
+
+                {% endif %}
             
             {% endif %}
         </div>
-    
     </div>
+
+    <script>
+        
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", function(){
+
+            document.getElementById(
+                "predictBtn"
+            ).innerHTML = "Analyzing Profile...";
+        });
+
+    </script>
 </body>
 </html>
